@@ -56,12 +56,12 @@ int main(int argc, char* args[]) {
 
 	srand(time(NULL));
 
-	x[0] = 400, rest_x[0] = 400;
-	y[0] = 400, rest_y[0] = 400;
-	x[1] = 400, rest_x[1] = 400;
-	y[1] = 350, rest_y[1] = 350;
-	x[2] = 400, rest_x[2] = 400;
-	y[2] = 300, rest_y[2] = 300;
+	x[0] = 400, rest_x[0] = 400; //------------------------------------------------//
+	y[0] = 400, rest_y[0] = 400; //------------------------------------------------//
+	x[1] = 400, rest_x[1] = 400; //------------เปลี่ยนตามขนาดของแต่ละจุด -------------//
+	y[1] = 350, rest_y[1] = 350; //------------If chang size 50 to 20 =========>>>>>
+	x[2] = 400, rest_x[2] = 400; //==>>Point chang from 300,350,400 to 300,320,360 //
+	y[2] = 300, rest_y[2] = 300; //------------------------------------------------//
 
 	menu_bg_surface = IMG_Load("image/body.png");
 	menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
@@ -110,17 +110,17 @@ int main(int argc, char* args[]) {
 						keyboard_on = 1;
 					}
 					break;
-				case SDLK_RETURN:   //Check button ENTER
+				case SDLK_RETURN:   //Check button ENTER and Restart at beginning point
 					game_on = 1;
-					x[0] = 400, rest_x[0] = 400;
-					y[0] = 400, rest_y[0] = 400;
-					x[1] = 400, rest_x[1] = 400;
-					y[1] = 350, rest_y[1] = 350;
-					x[2] = 400, rest_x[2] = 400;
-					y[2] = 300, rest_y[2] = 300;
-					size = 3;
-					direction = 2;
-					speed = 250000;
+					x[0] = 400, rest_x[0] = 400; //--
+					y[0] = 400, rest_y[0] = 400; //--
+					x[1] = 400, rest_x[1] = 400; //--
+					y[1] = 350, rest_y[1] = 350; //--
+					x[2] = 400, rest_x[2] = 400; //--
+					y[2] = 300, rest_y[2] = 300; //--
+					size = 3; //ขนาดเดิม
+					direction = 2; //ทิศทางเดิม
+					speed = 250000; //ความเร็วเดิม
 					break;
 				default:
 					break;
@@ -147,8 +147,10 @@ int main(int argc, char* args[]) {
 
 			while (food_appear == 0){ // เช็คว่างูกินอาหารหรือยัง
 				food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
-                position_food_x = 50 * (rand() % 24); // random แกน x ของอาหาร
-                position_food_y = 50 * (rand() % 14); // random แกน y ของอาหาร
+                position_food_x = 50 * (rand() % 24); // random แกน x ของอาหาร and size object * number point = size program
+                position_food_y = 50 * (rand() % 14); // random แกน y ของอาหาร (translat line up) และขนาดของวัตถุ * จำนวนพิกัดทั้งหทด = ขนาดของจอโปรแกรม
+				//----50 * 24 = 1200
+				//----50 * 12 = 700
                 food_appear = 1;
 
                 /* เช็คว่าพิกัดของอาหารซํ้ากับตัวงูหรือไม่ */
@@ -178,16 +180,16 @@ int main(int argc, char* args[]) {
 
 			switch(direction){
 				case 1:
-					y[0] -= 50;
+					y[0] -= 50; //Size of point
 					break;
 				case 2:
-					y[0] += 50;
+					y[0] += 50; //--
 					break;
 				case 3:
-					x[0] -= 50;
+					x[0] -= 50; //--
 					break;
 				case 4:
-					x[0] += 50;
+					x[0] += 50; //--
 					break;
 				default:
 					break;
