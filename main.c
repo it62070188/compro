@@ -135,6 +135,7 @@ int main(int argc, char* args[]) {
 			SDL_RenderClear(renderer);
 			render_something(fail_texture, 0, 0, 1200, 700);
 			SDL_RenderPresent(renderer);
+			point = 0; // คะแนน
 		}
 
 		if (frameTime % speed == 0 && game_on) {  //render background and function in main menu
@@ -168,6 +169,15 @@ int main(int argc, char* args[]) {
 			}
 			else{
 				render_something(food_texture, position_food_x, position_food_y, 50, 50);
+			}
+
+			if(point >= 2){
+				menu_bg_surface = IMG_Load("image/squer.png");
+				menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
+			}
+			else{
+				menu_bg_surface = IMG_Load("image/body.png");
+				menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 			}
 
 			if(x[0] >= 1200 || x[0] < 0 || y[0] >= 700 || y[0] < 0){
