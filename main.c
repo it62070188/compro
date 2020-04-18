@@ -39,11 +39,12 @@ int x[1000], y[1000];
 int rest_x[1000], rest_y[1000];
 int size = 3;
 int keyboard_on = 0;
-int speed = 250000;
+int speed = 300000;
 int position_food_x , position_food_y;
 int food_appear = 0;
 int game_on = 1;
 int bg_count = 0;
+int point = 0;
 
 
 int main(int argc, char* args[]) {
@@ -120,7 +121,7 @@ int main(int argc, char* args[]) {
 					y[2] = 300, rest_y[2] = 300; //--
 					size = 3; //ขนาดเดิม
 					direction = 2; //ทิศทางเดิม
-					speed = 250000; //ความเร็วเดิม
+					speed = 300000; //ความเร็วเดิม
 					break;
 				default:
 					break;
@@ -217,6 +218,7 @@ int main(int argc, char* args[]) {
 						break;
 				}
                 size++; // ตัวแปรขนาด บวก 1
+				point++; // ตัวแปรคะแนน บวก 1
 				speed -= 5000;
                 food_appear = 0;
 				SDL_DestroyTexture(food_texture); // ทําลาย texture อาหารเก่าทิ้ง
