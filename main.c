@@ -39,7 +39,7 @@ int x[1000], y[1000];
 int rest_x[1000], rest_y[1000];
 int size = 3;
 int keyboard_on = 0;
-int speed = 300000;
+int speed = 250000;
 int position_food_x , position_food_y;
 int food_appear = 0;
 int game_on = 1;
@@ -121,7 +121,7 @@ int main(int argc, char* args[]) {
 					y[2] = 300, rest_y[2] = 300; //--
 					size = 3; //ขนาดเดิม
 					direction = 2; //ทิศทางเดิม
-					speed = 300000; //ความเร็วเดิม
+					speed = 250000; //ความเร็วเดิม
 					break;
 				default:
 					break;
@@ -171,13 +171,25 @@ int main(int argc, char* args[]) {
 				render_something(food_texture, position_food_x, position_food_y, 25, 25);
 			}
 
-			if(point >= 2){
-				menu_bg_surface = IMG_Load("image/squer.png");
+			if(point >= 6){
+				menu_bg_surface = IMG_Load("image/ani.png");
 				menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 			}
 			else{
-				menu_bg_surface = IMG_Load("image/body.png");
-				menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
+				if(point >= 4){
+					menu_bg_surface = IMG_Load("image/three.png");
+					menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
+				}
+				else{
+					if(point >= 2){
+						menu_bg_surface = IMG_Load("image/squer.png");
+						menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
+					}
+					else{
+						menu_bg_surface = IMG_Load("image/body.png");
+						menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
+					}
+				}
 			}
 
 			if(x[0] >= 1200 || x[0] < 0 || y[0] >= 700 || y[0] < 0){
