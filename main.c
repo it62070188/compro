@@ -57,17 +57,17 @@ int main(int argc, char* args[]) {
 
 	srand(time(NULL));
 
-	x[0] = 350, rest_x[0] = 350; //------------------------------------------------//
-	y[0] = 350, rest_y[0] = 350; //------------------------------------------------//
-	x[1] = 350, rest_x[1] = 350; //------------เปลี่ยนตามขนาดของแต่ละจุด -------------//
-	y[1] = 325, rest_y[1] = 325; //------------If chang size 50 to 20 =========>>>>>
-	x[2] = 350, rest_x[2] = 350; //==>>Point chang from 300,325,400 to 300,320,360 //
+	x[0] = 400, rest_x[0] = 400; //------------------------------------------------//
+	y[0] = 400, rest_y[0] = 400; //------------------------------------------------//
+	x[1] = 400, rest_x[1] = 400; //------------เปลี่ยนตามขนาดของแต่ละจุด -------------//
+	y[1] = 350, rest_y[1] = 350; //------------If chang size 50 to 20 =========>>>>>
+	x[2] = 400, rest_x[2] = 400; //==>>Point chang from 300,350,400 to 300,320,360 //
 	y[2] = 300, rest_y[2] = 300; //------------------------------------------------//
 
 	menu_bg_surface = IMG_Load("image/body.png");
 	menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 
-	bg_surface = IMG_Load("image/background/bg_sprite.png");
+	bg_surface = IMG_Load("image/background/Firststage.png");
 	bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
 
 	food_surface = IMG_Load("image/apple.png");
@@ -113,11 +113,11 @@ int main(int argc, char* args[]) {
 					break;
 				case SDLK_RETURN:   //Check button ENTER and Restart at beginning point
 					game_on = 1;
-					x[0] = 350, rest_x[0] = 350; //--
-					y[0] = 350, rest_y[0] = 350; //--
-					x[1] = 350, rest_x[1] = 350; //--
-					y[1] = 325, rest_y[1] = 325; //--
-					x[2] = 350, rest_x[2] = 350; //--
+					x[0] = 400, rest_x[0] = 400; //--
+					y[0] = 400, rest_y[0] = 400; //--
+					x[1] = 400, rest_x[1] = 400; //--
+					y[1] = 350, rest_y[1] = 350; //--
+					x[2] = 400, rest_x[2] = 400; //--
 					y[2] = 300, rest_y[2] = 300; //--
 					size = 3; //ขนาดเดิม
 					direction = 2; //ทิศทางเดิม
@@ -144,15 +144,15 @@ int main(int argc, char* args[]) {
 			if(bg_count == 4){
 				bg_count = 0;
 			}
-			render_animation(bg_texture, bg_count, 500, 263, 0, 0, 1200, 700);
+			render_something(bg_texture, 0, 0, 1200, 700);
 			bg_count++;
 
 			while (food_appear == 0){ // เช็คว่างูกินอาหารหรือยัง
 				food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
-                position_food_x = 25 * (rand() % 48); // random แกน x ของอาหาร and size object * number point = size program
-                position_food_y = 25 * (rand() % 24); // random แกน y ของอาหาร (translat line up) และขนาดของวัตถุ * จำนวนพิกัดทั้งหทด = ขนาดของจอโปรแกรม
-				//----25 * 48 = 1200
-				//----25 * 24 = 700
+                position_food_x = 50 * (rand() % 24); // random แกน x ของอาหาร and size object * number point = size program
+                position_food_y = 50 * (rand() % 14); // random แกน y ของอาหาร (translat line up) และขนาดของวัตถุ * จำนวนพิกัดทั้งหทด = ขนาดของจอโปรแกรม
+				//----50 * 24 = 1200
+				//----50 * 14 = 700
                 food_appear = 1;
 
                 /* เช็คว่าพิกัดของอาหารซํ้ากับตัวงูหรือไม่ */
@@ -165,10 +165,10 @@ int main(int argc, char* args[]) {
 			}
 
 			if (size % 2 == 0){
-				render_something(radish_texture, position_food_x, position_food_y, 25, 25);
+				render_something(radish_texture, position_food_x, position_food_y, 50, 50);
 			}
 			else{
-				render_something(food_texture, position_food_x, position_food_y, 25, 25);
+				render_something(food_texture, position_food_x, position_food_y, 50, 50);
 			}
 
 			if(point >= 6){
@@ -198,21 +198,21 @@ int main(int argc, char* args[]) {
 			}
 
 			for (int i = 0; i < size; i++){
-                render_something(menu_bg_texture, x[i], y[i], 25, 25);
+                render_something(menu_bg_texture, x[i], y[i], 50, 50);
             }
 
 			switch(direction){
 				case 1:
-					y[0] -= 25; //Size of point
+					y[0] -= 50; //Size of point
 					break;
 				case 2:
-					y[0] += 25; //--
+					y[0] += 50; //--
 					break;
 				case 3:
-					x[0] -= 25; //--
+					x[0] -= 50; //--
 					break;
 				case 4:
-					x[0] += 25; //--
+					x[0] += 50; //--
 					break;
 				default:
 					break;
@@ -222,18 +222,18 @@ int main(int argc, char* args[]) {
 				switch(direction){
 					case 1:
 						x[size] = x[size - 1];
-						y[size] = y[size - 1] - 25;
+						y[size] = y[size - 1] - 50;
 						break;
 					case 2:
 						x[size] = x[size - 1];
-						y[size] = y[size - 1] + 25;
+						y[size] = y[size - 1] + 50;
 						break;
 					case 3:
-						x[size] = x[size - 1] + 25;
+						x[size] = x[size - 1] + 50;
 						y[size] = y[size - 1];
 						break;
 					case 4:
-						x[size] = x[size - 1] - 25;
+						x[size] = x[size - 1] - 50;
 						y[size] = y[size - 1];
 						break;
 					default:
