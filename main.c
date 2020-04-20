@@ -67,7 +67,7 @@ int main(int argc, char* args[]) {
 	menu_bg_surface = IMG_Load("image/body.png");
 	menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 
-	bg_surface = IMG_Load("image/background/Firststage.png");
+	bg_surface = IMG_Load("image/background/fang_sp.png");
 	bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
 
 	food_surface = IMG_Load("image/apple.png");
@@ -144,7 +144,7 @@ int main(int argc, char* args[]) {
 			if(bg_count == 4){
 				bg_count = 0;
 			}
-			render_something(bg_texture, 0, 0, 1200, 700);
+			render_animation(bg_texture, bg_count, 1200, 480, 0, 0, 1200, 700); //ถ้าเป็น GIF ต้องใช้ rander_animation(bg_texture, bg_count, width, height, 0, 0, 1200ขนาดจอwidth, 700ขนาดจอheight);
 			bg_count++;
 
 			while (food_appear == 0){ // เช็คว่างูกินอาหารหรือยัง
