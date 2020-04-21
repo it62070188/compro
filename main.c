@@ -172,21 +172,21 @@ int main(int argc, char* args[]) {
 			}
 
 			if(point >= 6){
-				menu_bg_surface = IMG_Load("image/ani.png");
+				menu_bg_surface = IMG_Load("image/Snake4.png");
 				menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 			}
 			else{
 				if(point >= 4){
-					menu_bg_surface = IMG_Load("image/three.png");
+					menu_bg_surface = IMG_Load("image/Snake3.png");
 					menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 				}
 				else{
 					if(point >= 2){
-						menu_bg_surface = IMG_Load("image/squer.png");
+						menu_bg_surface = IMG_Load("image/Snake2.png");
 						menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 					}
 					else{
-						menu_bg_surface = IMG_Load("image/body.png");
+						menu_bg_surface = IMG_Load("image/Snake1.png");
 						menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 					}
 				}
