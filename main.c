@@ -223,10 +223,10 @@ int main(int argc, char* args[]) {
 			SDL_RenderClear(renderer);  //เคลียตัว renderer
 
 			if (point >= 20){
-				render_animation(bg3_texture, bg_count, 500, 263, 0, 0, 1200, 700); //ถ้าเป็น GIF ต้องใช้ rander_animation(bg_texture, bg_count, width, height, 0, 0, 1200ขนาดจอwidth, 700ขนาดจอheight);
+				render_animation(bg2_texture, bg_count, 1200, 480, 0, 0, 1200, 700); //ถ้าเป็น GIF ต้องใช้ rander_animation(bg_texture, bg_count, width, height, 0, 0, 1200ขนาดจอwidth, 700ขนาดจอheight);
 			}
 			else if (point >= 13){
-				render_animation(bg2_texture, bg_count, 1200, 480, 0, 0, 1200, 700);
+				render_animation(bg3_texture, bg_coun, 500, 263, 0, 0, 1200, 700);
 			}
 			else if (point >= 5){
 				render_animation(bg1_texture, bg_count, 1200, 480, 0, 0, 1200, 700);
