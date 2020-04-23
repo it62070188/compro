@@ -21,11 +21,17 @@ SDL_Texture* bg_texture = NULL;
 SDL_Surface* menu_bg_surface = NULL;
 SDL_Texture* menu_bg_texture = NULL;
 
-SDL_Surface* food_surface = NULL;
-SDL_Texture* food_texture = NULL;
+SDL_Surface* food1_surface = NULL;
+SDL_Texture* food1_texture = NULL;
 
-SDL_Surface* radish_surface = NULL;
-SDL_Texture* radish_texture = NULL;
+SDL_Surface* food2_surface = NULL;
+SDL_Texture* food2_texture = NULL;
+
+SDL_Surface* food3_surface = NULL;
+SDL_Texture* food3_texture = NULL;
+
+SDL_Surface* food4_surface = NULL;
+SDL_Texture* food4_texture = NULL;
 
 SDL_Surface* fail_surface = NULL;
 SDL_Texture* fail_texture = NULL;
@@ -96,16 +102,22 @@ int main(int argc, char* args[]) {
 	bg_surface = IMG_Load("image/background/bg_sprite.png");
 	bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
 
-	food_surface = IMG_Load("image/apple.png");
-	food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
+	food1_surface = IMG_Load("image/Food2.png");
+	food1_texture = SDL_CreateTextureFromSurface(renderer, food1_surface);
+
+	food2_surface = IMG_Load("image/Food3.png");
+	food2_texture = SDL_CreateTextureFromSurface(renderer, food2_surface);
+
+	food3_surface = IMG_Load("image/Food4.png");
+	food3_texture = SDL_CreateTextureFromSurface(renderer, food3_surface);
+
+	food4_surface = IMG_Load("image/Food5.png");
+	food4_texture = SDL_CreateTextureFromSurface(renderer, food4_surface);
 
 	fail_surface = IMG_Load("image/fail.png");
 	fail_texture = SDL_CreateTextureFromSurface(renderer, fail_surface);
 
-	radish_surface = IMG_Load("image/radish.png");
-	radish_texture = SDL_CreateTextureFromSurface(renderer, radish_surface);
-
-	snake1_surface = IMG_Load("image/Snake1.png");
+	snake1_surface = IMG_Load("image/Snake5.png");
 	snake1_texture = SDL_CreateTextureFromSurface(renderer, snake1_surface);
 
 	snake2_surface = IMG_Load("image/Snake2.png");
@@ -201,7 +213,7 @@ int main(int argc, char* args[]) {
 			render_animation(bg_texture, bg_count, 500, 263, 0, 0, 1200, 700); //ถ้าเป็น GIF ต้องใช้ rander_animation(bg_texture, bg_count, width, height, 0, 0, 1200ขนาดจอwidth, 700ขนาดจอheight);
 
 			while (food_appear == 0){ // เช็คว่างูกินอาหารหรือยัง
-				food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
+				food1_texture = SDL_CreateTextureFromSurface(renderer, food1_surface);
 				position_food_x = 50 * (rand() % 24); // random แกน x ของอาหาร and size object * number point = size program
 				position_food_y = 50 * (rand() % 14); // random แกน y ของอาหาร (translat line up) และขนาดของวัตถุ * จำนวนพิกัดทั้งหทด = ขนาดของจอโปรแกรม
 				//----50 * 24 = 1200
@@ -217,17 +229,17 @@ int main(int argc, char* args[]) {
 				}
 			}
 
-			if(point >= 6){
-				render_something(food_texture, position_food_x, position_food_y, 50, 50);
+			if(point >= 20){
+				render_something(food4_texture, position_food_x, position_food_y, 50, 50);
 			}
-			else if (point >= 4){
-				render_something(radish_texture, position_food_x, position_food_y, 50, 50);
+			else if (point >= 13){
+				render_something(food3_texture, position_food_x, position_food_y, 50, 50);
 			}
-			else if (point >= 2){
-				render_something(food_texture, position_food_x, position_food_y, 50, 50);
+			else if (point >= 5){
+				render_something(food2_texture, position_food_x, position_food_y, 50, 50);
 			}
 			else{
-				render_something(radish_texture, position_food_x, position_food_y, 50, 50);
+				render_something(food1_texture, position_food_x, position_food_y, 50, 50);
 			}
 
 			if(x[0] >= 1200 || x[0] < 0 || y[0] >= 700 || y[0] < 0){
@@ -236,13 +248,13 @@ int main(int argc, char* args[]) {
 			}
 
 			for (int i = 0; i < size; i++){
-				if(point >= 6){
+				if(point >= 20){
 					render_something(snake4_texture, x[i], y[i], 50, 50);
 				}
-				else if (point >= 4){
+				else if (point >= 13){
 					render_something(snake3_texture, x[i], y[i], 50, 50);
 				}
-				else if (point >= 2){
+				else if (point >= 5){
 					render_something(snake2_texture, x[i], y[i], 50, 50);
 				}
 				else{
@@ -306,7 +318,7 @@ int main(int argc, char* args[]) {
 					sprintf(score_text, "Score: %0d", point);
 					message_surface_score = TTF_RenderText_Solid(sans, score_text, white);   //Create Variable for turn text
 					message_texture_score = SDL_CreateTextureFromSurface(renderer, message_surface_score);
-					SDL_DestroyTexture(food_texture); // ทําลาย texture อาหารเก่าทิ้ง
+					SDL_DestroyTexture(food1_texture); // ทําลาย texture อาหารเก่าทิ้ง
 				}
 
 				for (int i = 1; i < size; i++){
