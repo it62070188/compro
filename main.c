@@ -30,6 +30,18 @@ SDL_Texture* radish_texture = NULL;
 SDL_Surface* fail_surface = NULL;
 SDL_Texture* fail_texture = NULL;
 
+SDL_Surface* snake1_surface = NULL;
+SDL_Texture* snake1_texture = NULL;
+
+SDL_Surface* snake2_surface = NULL;
+SDL_Texture* snake2_texture = NULL;
+
+SDL_Surface* snake3_surface = NULL;
+SDL_Texture* snake3_texture = NULL;
+
+SDL_Surface* snake4_surface = NULL;
+SDL_Texture* snake4_texture = NULL;
+
 //Call Variable
 int running;
 int width = 1200, height = 700;    //Create width and height of program
@@ -43,9 +55,12 @@ int speed = 250000;
 int position_food_x , position_food_y;
 int food_appear = 0;
 int game_on = 1;
-int bg_count = 0;
+int bg_count = 0, bg_count2 = 0;
 int point = 0;
-
+int delay_time = 20000;
+int game_start = 0;
+int bg_delay = 0;
+char score_text[20];
 
 int main(int argc, char* args[]) {
 	TTF_Init();                              //SDL_ttf init
@@ -57,6 +72,17 @@ int main(int argc, char* args[]) {
 
 	srand(time(NULL));
 
+	TTF_Font* sans = TTF_OpenFont("font/HACKED.ttf", 100);   //Load font Hacked
+	SDL_Color black = { 0, 0, 0 };   //Set black color
+	SDL_Color white = { 255, 255, 255 };
+
+	SDL_Surface* message_surface_start = TTF_RenderText_Solid(sans, "Press Enter To Start", black);   //Create Variable for turn text
+	SDL_Texture* message_texture_start = SDL_CreateTextureFromSurface(renderer, message_surface_start);
+
+	sprintf(score_text, "Score: %d", point);
+	SDL_Surface* message_surface_score = TTF_RenderText_Solid(sans, score_text, white);   //Create Variable for turn text
+	SDL_Texture* message_texture_score = SDL_CreateTextureFromSurface(renderer, message_surface_score);
+
 	x[0] = 400, rest_x[0] = 400; //------------------------------------------------//
 	y[0] = 400, rest_y[0] = 400; //------------------------------------------------//
 	x[1] = 400, rest_x[1] = 400; //------------เปลี่ยนตามขนาดของแต่ละจุด -------------//
@@ -67,7 +93,7 @@ int main(int argc, char* args[]) {
 	menu_bg_surface = IMG_Load("image/body.png");
 	menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 
-	bg_surface = IMG_Load("image/background/fang_sp.png");
+	bg_surface = IMG_Load("image/background/bg_sprite.png");
 	bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
 
 	food_surface = IMG_Load("image/apple.png");
@@ -79,6 +105,18 @@ int main(int argc, char* args[]) {
 	radish_surface = IMG_Load("image/radish.png");
 	radish_texture = SDL_CreateTextureFromSurface(renderer, radish_surface);
 
+	snake1_surface = IMG_Load("image/Snake1.png");
+	snake1_texture = SDL_CreateTextureFromSurface(renderer, snake1_surface);
+
+	snake2_surface = IMG_Load("image/Snake2.png");
+	snake2_texture = SDL_CreateTextureFromSurface(renderer, snake2_surface);
+
+	snake3_surface = IMG_Load("image/Snake3.png");
+	snake3_texture = SDL_CreateTextureFromSurface(renderer, snake3_surface);
+
+	snake4_surface = IMG_Load("image/Snake4.png");
+	snake4_texture = SDL_CreateTextureFromSurface(renderer, snake4_surface);
+
 	while (running) {
 
 		while (SDL_PollEvent(&event)) {
@@ -88,40 +126,50 @@ int main(int argc, char* args[]) {
 			else if (event.type == SDL_KEYDOWN) {    //Check Keyboard Event
 				switch (event.key.keysym.sym){
 				case SDLK_UP:    //Check button arrow up
-					if (direction != 2 && keyboard_on == 0){
+					if (direction != 2 && keyboard_on == 0 && game_start){
 						direction = 1;
 						keyboard_on = 1;
 					}
 					break;
 				case SDLK_DOWN:  //Check button arrow down
-					if (direction != 1 && keyboard_on == 0){
+					if (direction != 1 && keyboard_on == 0 && game_start){
 						direction = 2;
 						keyboard_on = 1;
 					}
 					break;
 				case SDLK_LEFT:  //Check button arrow left
-					if (direction != 4 && keyboard_on == 0){
+					if (direction != 4 && keyboard_on == 0 && game_start){
 						direction = 3;
 						keyboard_on = 1;
 					}
 					break;
 				case SDLK_RIGHT:  //Check button arrow right
-					if (direction != 3 && keyboard_on == 0){
+					if (direction != 3 && keyboard_on == 0 && game_start){
 						direction = 4;
 						keyboard_on = 1;
 					}
 					break;
 				case SDLK_RETURN:   //Check button ENTER and Restart at beginning point
-					game_on = 1;
-					x[0] = 400, rest_x[0] = 400; //--
-					y[0] = 400, rest_y[0] = 400; //--
-					x[1] = 400, rest_x[1] = 400; //--
-					y[1] = 350, rest_y[1] = 350; //--
-					x[2] = 400, rest_x[2] = 400; //--
-					y[2] = 300, rest_y[2] = 300; //--
-					size = 3; //ขนาดเดิม
-					direction = 2; //ทิศทางเดิม
-					speed = 250000; //ความเร็วเดิม
+					if (game_on == 0){
+						game_on = 1;
+						x[0] = 400, rest_x[0] = 400; //--
+						y[0] = 400, rest_y[0] = 400; //--
+						x[1] = 400, rest_x[1] = 400; //--
+						y[1] = 350, rest_y[1] = 350; //--
+						x[2] = 400, rest_x[2] = 400; //--
+						y[2] = 300, rest_y[2] = 300; //--
+						size = 3; //ขนาดเดิม
+						direction = 2; //ทิศทางเดิม
+						speed = 250000; //ความเร็วเดิม
+						delay_time = 20000;
+						game_start = 0;
+					}
+					else if (game_start == 0){
+						game_start = 1;
+						sprintf(score_text, "Score: %0d", point);
+						message_surface_score = TTF_RenderText_Solid(sans, score_text, white);   //Create Variable for turn text
+						message_texture_score = SDL_CreateTextureFromSurface(renderer, message_surface_score);
+					}
 					break;
 				default:
 					break;
@@ -131,65 +179,55 @@ int main(int argc, char* args[]) {
 
 		frameTime++;
 
-		if (frameTime % 100000 == 0 && game_on == 0){
+		if (game_on == 0){
 			SDL_RenderClear(renderer);
 			render_something(fail_texture, 0, 0, 1200, 700);
 			SDL_RenderPresent(renderer);
 			point = 0; // คะแนน
 		}
 
-		if (frameTime % speed == 0 && game_on) {  //render background and function in main menu
+		if(bg_count == 3){
+			bg_count = 0;
+		}
+		if(bg_count2 >= bg_delay/2){
+			bg_count++;
+			bg_count2 = 0;
+		}
+		bg_count2++;
+
+		if (game_on == 1){
 			SDL_RenderClear(renderer);  //เคลียตัว renderer
 
-			if(bg_count == 4){
-				bg_count = 0;
-			}
-			render_animation(bg_texture, bg_count, 1200, 480, 0, 0, 1200, 700); //ถ้าเป็น GIF ต้องใช้ rander_animation(bg_texture, bg_count, width, height, 0, 0, 1200ขนาดจอwidth, 700ขนาดจอheight);
-			bg_count++;
+			render_animation(bg_texture, bg_count, 500, 263, 0, 0, 1200, 700); //ถ้าเป็น GIF ต้องใช้ rander_animation(bg_texture, bg_count, width, height, 0, 0, 1200ขนาดจอwidth, 700ขนาดจอheight);
 
 			while (food_appear == 0){ // เช็คว่างูกินอาหารหรือยัง
 				food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
-                position_food_x = 50 * (rand() % 24); // random แกน x ของอาหาร and size object * number point = size program
-                position_food_y = 50 * (rand() % 14); // random แกน y ของอาหาร (translat line up) และขนาดของวัตถุ * จำนวนพิกัดทั้งหทด = ขนาดของจอโปรแกรม
+				position_food_x = 50 * (rand() % 24); // random แกน x ของอาหาร and size object * number point = size program
+				position_food_y = 50 * (rand() % 14); // random แกน y ของอาหาร (translat line up) และขนาดของวัตถุ * จำนวนพิกัดทั้งหทด = ขนาดของจอโปรแกรม
 				//----50 * 24 = 1200
 				//----50 * 14 = 700
-                food_appear = 1;
+				food_appear = 1;
 
-                /* เช็คว่าพิกัดของอาหารซํ้ากับตัวงูหรือไม่ */
-                for (int i = 0; i < size; i++){
-                    if (position_food_x == x[i] && position_food_y == y[i]){
-                        food_appear = 0;
-                        break;
-                    }
-                }
-			}
-
-			if (size % 2 == 0){
-				render_something(radish_texture, position_food_x, position_food_y, 50, 50);
-			}
-			else{
-				render_something(food_texture, position_food_x, position_food_y, 50, 50);
+				/* เช็คว่าพิกัดของอาหารซํ้ากับตัวงูหรือไม่ */
+				for (int i = 0; i < size; i++){
+					if (position_food_x == x[i] && position_food_y == y[i]){
+						food_appear = 0;
+						break;
+					}
+				}
 			}
 
 			if(point >= 6){
-				menu_bg_surface = IMG_Load("image/Snake4.png");
-				menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
+				render_something(food_texture, position_food_x, position_food_y, 50, 50);
+			}
+			else if (point >= 4){
+				render_something(radish_texture, position_food_x, position_food_y, 50, 50);
+			}
+			else if (point >= 2){
+				render_something(food_texture, position_food_x, position_food_y, 50, 50);
 			}
 			else{
-				if(point >= 4){
-					menu_bg_surface = IMG_Load("image/Snake3.png");
-					menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
-				}
-				else{
-					if(point >= 2){
-						menu_bg_surface = IMG_Load("image/Snake2.png");
-						menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
-					}
-					else{
-						menu_bg_surface = IMG_Load("image/Snake1.png");
-						menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
-					}
-				}
+				render_something(radish_texture, position_food_x, position_food_y, 50, 50);
 			}
 
 			if(x[0] >= 1200 || x[0] < 0 || y[0] >= 700 || y[0] < 0){
@@ -198,72 +236,98 @@ int main(int argc, char* args[]) {
 			}
 
 			for (int i = 0; i < size; i++){
-                render_something(menu_bg_texture, x[i], y[i], 50, 50);
-            }
-
-			switch(direction){
-				case 1:
-					y[0] -= 50; //Size of point
-					break;
-				case 2:
-					y[0] += 50; //--
-					break;
-				case 3:
-					x[0] -= 50; //--
-					break;
-				case 4:
-					x[0] += 50; //--
-					break;
-				default:
-					break;
+				if(point >= 6){
+					render_something(snake4_texture, x[i], y[i], 50, 50);
+				}
+				else if (point >= 4){
+					render_something(snake3_texture, x[i], y[i], 50, 50);
+				}
+				else if (point >= 2){
+					render_something(snake2_texture, x[i], y[i], 50, 50);
+				}
+				else{
+					render_something(snake1_texture, x[i], y[i], 50, 50);
+				}
 			}
 
-			if (x[0] == position_food_x && y[0] == position_food_y){ // ถ้าเก็บอาหารได้
+			if(game_start == 0){
+				render_something(message_texture_start, 300, 300 , 600 ,80);
+			}
+
+			if (game_start == 1){
 				switch(direction){
 					case 1:
-						x[size] = x[size - 1];
-						y[size] = y[size - 1] - 50;
+						y[0] -= 50; //Size of point
 						break;
 					case 2:
-						x[size] = x[size - 1];
-						y[size] = y[size - 1] + 50;
+						y[0] += 50; //--
 						break;
 					case 3:
-						x[size] = x[size - 1] + 50;
-						y[size] = y[size - 1];
+						x[0] -= 50; //--
 						break;
 					case 4:
-						x[size] = x[size - 1] - 50;
-						y[size] = y[size - 1];
+						x[0] += 50; //--
 						break;
 					default:
 						break;
 				}
-                size++; // ตัวแปรขนาด บวก 1
-				point++; // ตัวแปรคะแนน บวก 1
-				speed -= 5000;
-                food_appear = 0;
-				SDL_DestroyTexture(food_texture); // ทําลาย texture อาหารเก่าทิ้ง
-            }
 
-			for (int i = 1; i < size; i++){
-				if (x[0] == x[i] && y[0] == y[i]){ // ถ้างูชนตัวเอง
-                    game_on = 0;
-                    break;
-                }
-                x[i] = rest_x[i - 1];
-                y[i] = rest_y[i - 1];
-            }
+				if (x[0] == position_food_x && y[0] == position_food_y){ // ถ้าเก็บอาหารได้
+					switch(direction){
+						case 1:
+							x[size] = x[size - 1];
+							y[size] = y[size - 1] - 50;
+							break;
+						case 2:
+							x[size] = x[size - 1];
+							y[size] = y[size - 1] + 50;
+							break;
+						case 3:
+							x[size] = x[size - 1] + 50;
+							y[size] = y[size - 1];
+								break;
+						case 4:
+							x[size] = x[size - 1] - 50;
+							y[size] = y[size - 1];
+							break;
+						default:
+							break;
+					}
+					size++; // ตัวแปรขนาด บวก 1
+					point++; // ตัวแปรคะแนน บวก 1
+					speed -= 5000;
+					if (delay_time > 5000){
+						delay_time -= 1000;
+					}
+					if (bg_delay < 15){
+						bg_delay += 1;
+					}
+					food_appear = 0;
+					sprintf(score_text, "Score: %0d", point);
+					message_surface_score = TTF_RenderText_Solid(sans, score_text, white);   //Create Variable for turn text
+					message_texture_score = SDL_CreateTextureFromSurface(renderer, message_surface_score);
+					SDL_DestroyTexture(food_texture); // ทําลาย texture อาหารเก่าทิ้ง
+				}
 
-			for (int i = 0; i < size; i++){
-                rest_x[i] = x[i];
-                rest_y[i] = y[i];
-            }
+				for (int i = 1; i < size; i++){
+					if (x[0] == x[i] && y[0] == y[i]){ // ถ้างูชนตัวเอง
+						game_on = 0;
+						break;
+					}
+					x[i] = rest_x[i - 1];
+					y[i] = rest_y[i - 1];
+				}
 
+				for (int i = 0; i < size; i++){
+					rest_x[i] = x[i];
+					rest_y[i] = y[i];
+				}
+				render_something(message_texture_score, 1000, 30, 150, 40);
+			}
 			keyboard_on = 0;
 			SDL_RenderPresent(renderer);  //Render ตัว Renderer ออกมาทางหน้าจอ
+			delay_function(delay_time);
 		}
-
 	}
 	//zone ปิดโปรแกรม
 	SDL_DestroyRenderer(renderer);
