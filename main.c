@@ -99,7 +99,7 @@ int main(int argc, char* args[]) {
 	menu_bg_surface = IMG_Load("image/body.png");
 	menu_bg_texture = SDL_CreateTextureFromSurface(renderer, menu_bg_surface);
 
-	bg_surface = IMG_Load("image/background/bg_sprite.png");
+	bg_surface = IMG_Load("image/background/bg4.png");
 	bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
 
 	food1_surface = IMG_Load("image/Food2.png");
@@ -210,7 +210,7 @@ int main(int argc, char* args[]) {
 		if (game_on == 1){
 			SDL_RenderClear(renderer);  //เคลียตัว renderer
 
-			render_animation(bg_texture, bg_count, 500, 263, 0, 0, 1200, 700); //ถ้าเป็น GIF ต้องใช้ rander_animation(bg_texture, bg_count, width, height, 0, 0, 1200ขนาดจอwidth, 700ขนาดจอheight);
+			render_animation(bg_texture, bg_count, 1200, 480, 0, 0, 1200, 700); //ถ้าเป็น GIF ต้องใช้ rander_animation(bg_texture, bg_count, width, height, 0, 0, 1200ขนาดจอwidth, 700ขนาดจอheight);
 
 			while (food_appear == 0){ // เช็คว่างูกินอาหารหรือยัง
 				food1_texture = SDL_CreateTextureFromSurface(renderer, food1_surface);
