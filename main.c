@@ -222,13 +222,13 @@ int main(int argc, char* args[]) {
 		if (game_on == 1){
 			SDL_RenderClear(renderer);  //เคลียตัว renderer
 
-			if (point >= 6){
+			if (point >= 20){
 				render_animation(bg3_texture, bg_count, 500, 263, 0, 0, 1200, 700); //ถ้าเป็น GIF ต้องใช้ rander_animation(bg_texture, bg_count, width, height, 0, 0, 1200ขนาดจอwidth, 700ขนาดจอheight);
 			}
-			else if (point >= 4){
+			else if (point >= 13){
 				render_animation(bg2_texture, bg_count, 1200, 480, 0, 0, 1200, 700);
 			}
-			else if (point >= 2){
+			else if (point >= 5){
 				render_animation(bg1_texture, bg_count, 1200, 480, 0, 0, 1200, 700);
 			}
 			else{
@@ -252,13 +252,13 @@ int main(int argc, char* args[]) {
 				}
 			}
 
-			if(point >= 6){
+			if(point >= 20){
 				render_something(food4_texture, position_food_x, position_food_y, 50, 50);
 			}
-			else if (point >= 4){
+			else if (point >= 13){
 				render_something(food3_texture, position_food_x, position_food_y, 50, 50);
 			}
-			else if (point >= 2){
+			else if (point >= 5){
 				render_something(food2_texture, position_food_x, position_food_y, 50, 50);
 			}
 			else{
@@ -271,13 +271,13 @@ int main(int argc, char* args[]) {
 			}
 
 			for (int i = 0; i < size; i++){
-				if(point >= 6){
+				if(point >= 20){
 					render_something(snake4_texture, x[i], y[i], 50, 50);
 				}
-				else if (point >= 4){
+				else if (point >= 13){
 					render_something(snake3_texture, x[i], y[i], 50, 50);
 				}
-				else if (point >= 2){
+				else if (point >= 5){
 					render_something(snake2_texture, x[i], y[i], 50, 50);
 				}
 				else{
