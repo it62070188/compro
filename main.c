@@ -42,6 +42,9 @@ SDL_Texture* food4_texture = NULL;
 SDL_Surface* fail_surface = NULL;
 SDL_Texture* fail_texture = NULL;
 
+SDL_Surface* win_surface = NULL;
+SDL_Texture* win_texture = NULL;
+
 SDL_Surface* snake1_surface = NULL;
 SDL_Texture* snake1_texture = NULL;
 
@@ -128,6 +131,9 @@ int main(int argc, char* args[]) {
 
 	fail_surface = IMG_Load("image/Lose.png");
 	fail_texture = SDL_CreateTextureFromSurface(renderer, fail_surface);
+
+	win_surface = IMG_Load("image/Win.png");
+	win_texture = SDL_CreateTextureFromSurface(renderer, win_surface);
 
 	snake1_surface = IMG_Load("image/Snake5.png");
 	snake1_texture = SDL_CreateTextureFromSurface(renderer, snake1_surface);
