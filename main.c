@@ -126,7 +126,7 @@ int main(int argc, char* args[]) {
 	food4_surface = IMG_Load("image/Food5.png");
 	food4_texture = SDL_CreateTextureFromSurface(renderer, food4_surface);
 
-	fail_surface = IMG_Load("image/fail.png");
+	fail_surface = IMG_Load("image/Lose.png");
 	fail_texture = SDL_CreateTextureFromSurface(renderer, fail_surface);
 
 	snake1_surface = IMG_Load("image/Snake5.png");
