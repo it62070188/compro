@@ -84,7 +84,7 @@ int main(int argc, char* args[]) {
 
 	srand(time(NULL));
 
-	TTF_Font* sans = TTF_OpenFont("font/HACKED.ttf", 100);   //Load font Hacked
+	TTF_Font* sans = TTF_OpenFont("font/Choco Bear.otf", 100);   //Load font Hacked
 	SDL_Color black = { 0, 0, 0 };   //Set black color
 	SDL_Color white = { 255, 255, 255 };
 
