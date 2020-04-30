@@ -1,6 +1,6 @@
 **ABOUT PROJECT**
 -
-\- This is the part of project computer programming subject. "Snake Upgrage" is the new version of old snake game. We add more option such as new stage, new object and new pattern of snake. it will change if you can collect food to the specified score. The speed will increase with each stage. So be careful with it until you win!!!. Have fun!!
+\- This is the part of project computer programming subject. "Snake Upgrage" is the new version of old snake game. We add more option such as new stage, new object and new pattern of snake. It will change if you can collect food to the specified score. The speed will increase with each stage. So be careful with it until you win!!! Have fun!!
 
 **PRESENTATION**
 
