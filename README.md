@@ -36,9 +36,9 @@ ID  | Name Surname | Github |
 
 [![project4-2.png](https://i.postimg.cc/6qGb3ts7/project4-2.png)](https://postimg.cc/gLmHt92d) [![project5.png](https://i.postimg.cc/8C2t0xfN/project5.png)](https://postimg.cc/ns14sR1P)
 
-**HOW TO DOWLOAD**
+**HOW TO INSTALL**
 -
-\- Download zip file.
+\- Download zip file [here](https://github.com/it62070188/compro/blob/master/Snake%20Upgrade.rar).
 
 \- Extract file below.
 
