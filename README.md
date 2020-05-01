@@ -38,9 +38,9 @@ ID  | Name Surname | Github |
 
 **HOW TO DOWLOAD**
 -
-\- Download zip file from here.
+\- Download zip file.
 
-\- Extract the file.
+\- Extract file below.
 
 \- Run "Snake Upgrage.exe" to start
 
