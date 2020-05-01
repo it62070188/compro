@@ -390,14 +390,8 @@ int render_something(texture, pos_rect_x, pos_rect_y, rect_x, rect_y) {  //rende
 	SDL_RenderCopy(renderer, texture, NULL, &something_rect);
 }
 
-int delay_function(delay_diff) {  //เอาไว้ดีเล 10000 น่าจะ 1 วิ (มั้ง)
+int delay_function(delay_diff) {  
 	int delay = delay_diff / 60 - SDL_GetTicks() + SDL_GetTicks();
 	SDL_Delay(delay);
 	return 0;
 }
-
-/*
-เริ่มมาก็แตกไฟล์ MinGW.rar ไปแทนที่ MinGw ของตัวเองก่อน (จำเป็นมาก ใช้ในการ Complie)
-(แนะนำว่าไว้ใน Drive C นะ)
-ลอง cmd แล้วพิม mingw32-make ดูถ้าไม่ error แสดงว่าไม่มีปัญหา ถ้า error ก็ทักมานะจ้ะ
-*/
