@@ -2,6 +2,8 @@
 -
 \- This is the part of mini project in computer programming subject. "Snake Upgrage" is the new version of old snake game. We add more option such as new stage, new object and new pattern of snake. It will change if you can collect food to the specified score. The speed will increase with each stage. So be careful with it until you win!!! Have fun!!
 
+[![96103447-530918820918367-1092487737044369408-n.jpg](https://i.postimg.cc/sfbK02WL/96103447-530918820918367-1092487737044369408-n.jpg)](https://postimg.cc/4nbzYsBv)
+
 **GROUP MEMBER**
 -
 ID  | Name Surname | Github |
