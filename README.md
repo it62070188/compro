@@ -15,10 +15,10 @@ ID  | Name Surname | Github |
 
 **PRESENTATION**
 -
+[[![Watch the video](https://i.postimg.cc/yNZ5BLzQ/IMG-1565.png)](https://www.youtube.com/watch?v=lAEj3_7aRe4&feature=youtu.be&fbclid=IwAR1nPuUmSfDPB-_qcsShhLedRmTlgRsAzTeGLSY9sSbvuebZ-Mldq4PKLwY)]
 
 **PROGRAMMING LANGUAGE**
 -
-
 
 \- language C and library SDL
 
